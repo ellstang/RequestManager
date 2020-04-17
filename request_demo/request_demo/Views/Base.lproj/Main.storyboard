@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15705" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="rkO-Z9-Qe5">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15706"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--Main View Controller-->
+        <scene sceneID="tne-QT-ifu">
+            <objects>
+                <viewController id="BYZ-38-t0r" customClass="MainViewController" customModule="Mercari_test" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="jkI-o0-2Z4">
+                                <rect key="frame" x="0.0" y="88" width="414" height="774"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                            </tableView>
+                        </subviews>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <constraints>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="jkI-o0-2Z4" secondAttribute="trailing" id="1qq-zv-u52"/>
+                            <constraint firstItem="jkI-o0-2Z4" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="CFD-mH-79c"/>
+                            <constraint firstItem="jkI-o0-2Z4" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="clH-0U-KdJ"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="jkI-o0-2Z4" secondAttribute="bottom" id="g1N-CF-oDt"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="kAg-pN-9xm"/>
+                    <connections>
+                        <outlet property="gitHubUserTableView" destination="jkI-o0-2Z4" id="CuG-ef-2RF"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1047.8260869565217" y="118.52678571428571"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="n0F-HT-wES">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="rkO-Z9-Qe5" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="aOc-zg-ULZ">
+                        <rect key="frame" x="0.0" y="44" width="414" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="BYZ-38-t0r" kind="relationship" relationship="rootViewController" id="WFY-Iy-gnf"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="s25-4P-PvW" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="137.68115942028987" y="118.52678571428571"/>
+        </scene>
+        <!--Direct Message View Controller-->
+        <scene sceneID="627-CQ-Dgo">
+            <objects>
+                <viewController storyboardIdentifier="DirectMessageViewController" id="hBA-Qq-7Gd" customClass="DirectMessageViewController" customModule="Mercari_test" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="Cbr-Xe-fX3">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="pMM-wj-OWY">
+                                <rect key="frame" x="0.0" y="44" width="414" height="773"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                            </tableView>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="AC3-s3-6zV">
+                                <rect key="frame" x="0.0" y="817" width="414" height="79"/>
+                                <subviews>
+                                    <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="QTT-rm-GWA">
+                                        <rect key="frame" x="16" y="16" width="322" height="40"/>
+                                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="40" id="bpp-Xf-hIS"/>
+                                        </constraints>
+                                        <color key="textColor" red="0.77849381350000002" green="0.77849381350000002" blue="0.77849381350000002" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                                    </textView>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="WUg-pU-x0i">
+                                        <rect key="frame" x="354" y="12" width="44" height="44"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="44" id="de8-6y-sEW"/>
+                                            <constraint firstAttribute="width" constant="44" id="lwr-gI-1N6"/>
+                                        </constraints>
+                                        <state key="normal" title="send"/>
+                                        <connections>
+                                            <action selector="sendInputText:" destination="hBA-Qq-7Gd" eventType="touchUpInside" id="uMq-0W-7JJ"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                                <color key="backgroundColor" red="0.91090973984771573" green="0.91090973984771573" blue="0.91090973984771573" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                <constraints>
+                                    <constraint firstItem="QTT-rm-GWA" firstAttribute="leading" secondItem="AC3-s3-6zV" secondAttribute="leading" constant="16" id="4jf-55-WGs"/>
+                                    <constraint firstItem="WUg-pU-x0i" firstAttribute="leading" secondItem="QTT-rm-GWA" secondAttribute="trailing" constant="16" id="5bG-WV-9vU"/>
+                                    <constraint firstAttribute="bottom" secondItem="QTT-rm-GWA" secondAttribute="bottom" priority="250" constant="24" id="MOO-5Y-P1d"/>
+                                    <constraint firstItem="QTT-rm-GWA" firstAttribute="top" secondItem="AC3-s3-6zV" secondAttribute="top" constant="16" id="b4F-qP-QYN"/>
+                                    <constraint firstItem="WUg-pU-x0i" firstAttribute="bottom" secondItem="QTT-rm-GWA" secondAttribute="bottom" id="g6y-9U-lO5"/>
+                                    <constraint firstAttribute="trailing" secondItem="WUg-pU-x0i" secondAttribute="trailing" constant="16" id="hCC-nt-avN"/>
+                                </constraints>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <constraints>
+                            <constraint firstItem="pMM-wj-OWY" firstAttribute="leading" secondItem="1s5-92-Rby" secondAttribute="leading" id="8v2-B0-Qs7"/>
+                            <constraint firstItem="1s5-92-Rby" firstAttribute="trailing" secondItem="pMM-wj-OWY" secondAttribute="trailing" id="O6V-z9-iQF"/>
+                            <constraint firstItem="AC3-s3-6zV" firstAttribute="top" secondItem="pMM-wj-OWY" secondAttribute="bottom" id="R2M-Hx-ZyN"/>
+                            <constraint firstItem="pMM-wj-OWY" firstAttribute="top" secondItem="1s5-92-Rby" secondAttribute="top" id="cUt-Jg-IGG"/>
+                            <constraint firstItem="1s5-92-Rby" firstAttribute="bottom" secondItem="pMM-wj-OWY" secondAttribute="bottom" constant="45" id="f64-Ci-tS9"/>
+                            <constraint firstAttribute="bottom" secondItem="AC3-s3-6zV" secondAttribute="bottom" id="sRW-Md-SeY"/>
+                            <constraint firstItem="AC3-s3-6zV" firstAttribute="leading" secondItem="1s5-92-Rby" secondAttribute="leading" id="sTz-Cj-9Jh"/>
+                            <constraint firstItem="AC3-s3-6zV" firstAttribute="trailing" secondItem="1s5-92-Rby" secondAttribute="trailing" id="ypp-vC-FbQ"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="1s5-92-Rby"/>
+                    </view>
+                    <connections>
+                        <outlet property="enterInputButton" destination="WUg-pU-x0i" id="Wt1-pk-Egy"/>
+                        <outlet property="inputBackgroundView" destination="AC3-s3-6zV" id="kNk-kC-oU6"/>
+                        <outlet property="inputBackgroundviewBottomConstraint" destination="sRW-Md-SeY" id="q1Y-an-IBA"/>
+                        <outlet property="inputTextView" destination="QTT-rm-GWA" id="Kej-H2-Sek"/>
+                        <outlet property="messageTableView" destination="pMM-wj-OWY" id="rex-c8-oQr"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="XcE-6H-sL0" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2063.768115942029" y="118.52678571428571"/>
+        </scene>
+    </scenes>
+</document>
