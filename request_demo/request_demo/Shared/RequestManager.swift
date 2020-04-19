@@ -26,17 +26,17 @@ final class RequestManager {
         fetchData(router: router) { [weak self] result in
             switch result {
             case .success(let data):
-                if let data = data {
-                    if let users = try? self?.decoder.decode([GitHubUser].self, from: data) {
-                        DispatchQueue.main.async {
-                            completion(.success(users))
-                        }
-                    } else {
-                        DispatchQueue.main.async {
-                            completion(.success([GitHubUser]()))
-                        }
+                if let data = data,
+                    let users = try? self?.decoder.decode([GitHubUser].self, from: data) {
+                    DispatchQueue.main.async {
+                        completion(.success(users))
+                    }
+                } else {
+                    DispatchQueue.main.async {
+                        completion(.success([GitHubUser]()))
                     }
                 }
+
             case .failure(let error):
                 DispatchQueue.main.async {
                     completion(.failure(error))
@@ -55,21 +55,21 @@ final class RequestManager {
          This is just a dummy post
         */
 //        let router: Router = .getPostAtIndex(index: index)
-
+//
 //        fetchData(router: router) { [weak self] result in
 //            switch result {
 //            case .success(let data):
-//                if let data = data {
-//                    if let message = try? self?.decoder.decode(String.self, from: data) {
-//                        DispatchQueue.main.async {
-//                            completion(.success(message))
-//                        }
-//                    } else {
-//                        DispatchQueue.main.async {
-//                            completion(.success(nil))
-//                        }
+//                if let data = data,
+//                    let message = try? self?.decoder.decode(String.self, from: data) {
+//                    DispatchQueue.main.async {
+//                        completion(.success(message))
+//                    }
+//                } else {
+//                    DispatchQueue.main.async {
+//                        completion(.success(nil))
 //                    }
 //                }
+//
 //            case .failure(let error):
 //                completion(.failure(error))
 //            }
@@ -79,9 +79,8 @@ final class RequestManager {
 
 extension RequestManager {
     private func fetchData(router: Router, completion: @escaping (Result<Data?, RequestError>) -> Void) {
-        let baseURL: String = "https://api.github.com"
 
-        guard let url = URL(string: baseURL + router.config.path) else {
+        guard let url = URL(string: Config.baseURLStr + router.config.path) else {
             return
         }
 
@@ -112,6 +111,8 @@ extension RequestManager {
 
 extension RequestManager {
     private enum Config {
+        static let baseURLStr: String = "https://api.github.com"
+
         static let successStatusCodeRange: ClosedRange<Int> = 200...299
         static let exceedRateLimitCode: Int = 403
     }
