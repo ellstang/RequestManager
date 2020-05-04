@@ -21,25 +21,30 @@ final class RequestManager {
     /// - Parameters:
     ///   - since: since user at {index}
     ///   - completion: completion handler
-    func getGitHubUsers(since: Int, completion: @escaping (Result<[GitHubUser], RequestError>) -> Void) {
+    func getGitHubUsers(since: Int, completion: @escaping (Result<[GitHubUser], GitHubRequestError>) -> Void) {
         let router: Router = .getGitHubUsers(since: String(since))
         fetchData(router: router) { [weak self] result in
-            switch result {
-            case .success(let data):
-                if let data = data,
-                    let users = try? self?.decoder.decode([GitHubUser].self, from: data) {
-                    DispatchQueue.main.async {
+            DispatchQueue.main.async {
+                switch result {
+                case .success(let data):
+                    if let data = data,
+                        let users = try? self?.decoder.decode([GitHubUser].self, from: data) {
                         completion(.success(users))
-                    }
-                } else {
-                    DispatchQueue.main.async {
+                    } else {
                         completion(.success([GitHubUser]()))
                     }
-                }
-
-            case .failure(let error):
-                DispatchQueue.main.async {
-                    completion(.failure(error))
+                    
+                case .failure(let error):
+                    switch error {
+                    case .clientError(let statusCode):
+                        if statusCode == Config.exceedRateLimitCode {
+                            completion(.failure(.exceedRateLimitError))
+                        } else {
+                            completion(.failure(.otherErrors))
+                        }
+                    default:
+                        completion(.failure(.otherErrors))
+                    }
                 }
             }
         }
@@ -78,7 +83,7 @@ final class RequestManager {
 }
 
 extension RequestManager {
-    private func fetchData(router: Router, completion: @escaping (Result<Data?, RequestError>) -> Void) {
+    private func fetchData(router: Router, completion: @escaping (Result<Data?, BaseError>) -> Void) {
 
         guard let url = URL(string: Config.baseURLStr + router.config.path) else {
             return
@@ -94,12 +99,15 @@ extension RequestManager {
                 completion(.failure(.networkError(error: error ?? NSError())))
                 return
             }
-
-            switch urlResponse.statusCode {
+            
+            let statusCode: Int = urlResponse.statusCode
+            switch statusCode {
                 case Config.successStatusCodeRange:
                     completion(.success(responseData))
-                case Config.exceedRateLimitCode:
-                    completion(.failure(.exceedRateLimitError))
+                case Config.clientErrorCodeRange:
+                    completion(.failure(.clientError(statusCode: statusCode)))
+                case Config.serverErrorCodeRange:
+                    completion(.failure(.serverError))
                 default:
                     completion(.failure(.networkError(error: NSError())))
             }
@@ -114,6 +122,8 @@ extension RequestManager {
         static let baseURLStr: String = "https://api.github.com"
 
         static let successStatusCodeRange: ClosedRange<Int> = 200...299
+        static let clientErrorCodeRange: ClosedRange<Int> = 400...499
+        static let serverErrorCodeRange: ClosedRange<Int> = 500...599
         static let exceedRateLimitCode: Int = 403
     }
 }
