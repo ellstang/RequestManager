@@ -39,10 +39,10 @@ final class MainVCViewModel {
                 self.gitHubUsers += users
             case .failure(let error):
                 switch error {
-                case .networkError(error: let networkError):
-                    self.networkErrorHandler?(networkError)
                 case .exceedRateLimitError:
                     self.exceedRateLimitHandler?()
+                case .otherErrors:
+                    self.networkErrorHandler?(error)
                 }
             }
         }
