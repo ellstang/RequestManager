@@ -8,7 +8,13 @@
 
 import Foundation
 
-enum RequestError: Error {
+enum BaseError: Error {
     case networkError(error: Error)
+    case serverError
+    case clientError(statusCode: Int)
+}
+
+enum GitHubRequestError: Error {
     case exceedRateLimitError
+    case otherErrors
 }
